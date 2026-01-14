@@ -76,7 +76,7 @@ jobs:
           echo "Attente de Redis..."
           timeout 30 bash -c 'until nc -z localhost 6379; do sleep 1; done'
           echo "Redis prêt!"
-          npm run test:db:check
+          # npm run test:db:check # Temporarily disabled per user request (waiting for DB implementation)
 
       # 5. Linting ESLint
       - name: Exécution ESLint

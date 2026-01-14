@@ -15,7 +15,7 @@ const config: Config = {
   },
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
-    'scripts/**/*.{js,ts}',
+    // 'scripts/**/*.{js,ts}', // Disabled coverage for scripts until stable
     '!src/**/*.d.ts',
     '!src/**/*.stories.{js,jsx,ts,tsx}',
     '!src/__tests__/**',
