@@ -10,7 +10,7 @@ import { promisify } from 'util'
 
 const execAsync = promisify(exec)
 
-describe.skip('test:db:check script validation', () => {
+describe('test:db:check script validation', () => {
     // Increase timeout for script execution
     jest.setTimeout(15000)
 
