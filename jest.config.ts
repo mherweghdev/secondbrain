@@ -15,6 +15,7 @@ const config: Config = {
   },
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
+    'scripts/**/*.{js,ts}',
     '!src/**/*.d.ts',
     '!src/**/*.stories.{js,jsx,ts,tsx}',
     '!src/__tests__/**',

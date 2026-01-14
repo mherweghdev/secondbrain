@@ -10,6 +10,11 @@ Le projet utilise **GitHub Actions** comme plateforme CI/CD pour automatiser les
 - Push vers `main`, `develop`, ou branches `feat/**`
 - Pull requests vers `main` ou `develop`
 
+**Stratégie de Branching:**
+- `main`: Code de production stable
+- `develop`: Intégration continue
+- `feat/nom-fonctionnalite`: Développement de nouvelles fonctionnalités (déclenche CI)
+
 **Temps d'exécution cible:** < 5 minutes
 
 ## Quality Checks
