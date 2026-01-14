@@ -145,7 +145,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const installStep = steps.find((s) => s.name?.includes('Install dependencies'));
+      const installStep = steps.find((s) => s.name?.includes('Installation des dépendances'));
       expect(installStep).toBeDefined();
       expect(installStep?.run).toBe('npm ci');
     });
@@ -154,7 +154,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const verifyStep = steps.find((s) => s.name?.includes('Verify database'));
+      const verifyStep = steps.find((s) => s.name?.includes('Vérification connexion base de données'));
       expect(verifyStep).toBeDefined();
       expect(verifyStep?.run).toContain('PostgreSQL');
       expect(verifyStep?.run).toContain('Redis');
@@ -164,7 +164,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const lintStep = steps.find((s) => s.name?.includes('ESLint'));
+      const lintStep = steps.find((s) => s.name?.includes('Exécution ESLint'));
       expect(lintStep).toBeDefined();
       expect(lintStep?.run).toBe('npm run lint');
       expect(lintStep?.if).toBe('always()');
@@ -174,7 +174,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const typecheckStep = steps.find((s) => s.name?.includes('type check'));
+      const typecheckStep = steps.find((s) => s.name?.includes('Validation TypeScript'));
       expect(typecheckStep).toBeDefined();
       expect(typecheckStep?.run).toBe('npm run typecheck');
       expect(typecheckStep?.if).toBe('always()');
@@ -184,7 +184,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const testStep = steps.find((s) => s.name?.includes('tests with coverage'));
+      const testStep = steps.find((s) => s.name?.includes('Tests unitaires et couverture'));
       expect(testStep).toBeDefined();
       expect(testStep?.run).toBe('npm run test:coverage');
       expect(testStep?.if).toBe('always()');
@@ -194,7 +194,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const uploadStep = steps.find((s) => s.name?.includes('Upload coverage'));
+      const uploadStep = steps.find((s) => s.name?.includes('Upload rapport couverture'));
       expect(uploadStep).toBeDefined();
       expect(uploadStep?.uses).toBe('actions/upload-artifact@v4');
       expect(uploadStep?.with?.path).toBe('coverage/');
@@ -205,7 +205,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const buildStep = steps.find((s) => s.name?.includes('Build Next.js'));
+      const buildStep = steps.find((s) => s.name?.includes('Build application Next.js'));
       expect(buildStep).toBeDefined();
       expect(buildStep?.run).toBe('npm run build');
       expect(buildStep?.if).toBe('always()');
@@ -215,7 +215,7 @@ describe('CI/CD Configuration', () => {
       const job = workflowConfig.jobs['quality-checks'];
       expect(job).toBeDefined();
       const steps = job!.steps;
-      const commentStep = steps.find((s) => s.name?.includes('Comment PR'));
+      const commentStep = steps.find((s) => s.name?.includes('Ajout commentaire PR'));
       expect(commentStep).toBeDefined();
       expect(commentStep?.uses).toBe('actions/github-script@v7');
       expect(commentStep?.if).toContain('pull_request');
