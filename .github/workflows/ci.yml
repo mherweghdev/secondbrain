@@ -1,0 +1,117 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop, feat/**]
+  pull_request:
+    branches: [main, develop]
+
+env:
+  NODE_VERSION: '20'
+  DATABASE_URL: postgresql://testuser:testpass@localhost:5432/secondbrain_test
+  REDIS_URL: redis://localhost:6379
+  NODE_ENV: test
+  LOG_LEVEL: error
+
+permissions:
+  contents: read
+  pull-requests: write
+
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    name: Code Quality Checks
+    timeout-minutes: 10
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_USER: testuser
+          POSTGRES_DB: secondbrain_test
+        options: >-
+          --health-cmd "pg_isready -U testuser -d secondbrain_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 3s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      # 1. Récupération du code
+      - name: Checkout du dépôt
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Historique complet pour meilleure analyse
+
+      # 2. Configuration Node.js avec cache npm
+      - name: Configuration Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      # 3. Installation des dépendances
+      - name: Installation des dépendances
+        run: npm ci
+
+      # 4. Vérification services Docker
+      - name: Vérification connexion base de données
+        run: |
+          echo "Attente de PostgreSQL..."
+          timeout 30 bash -c 'until nc -z localhost 5432; do sleep 1; done'
+          echo "PostgreSQL prêt!"
+          echo "Attente de Redis..."
+          timeout 30 bash -c 'until nc -z localhost 6379; do sleep 1; done'
+          echo "Redis prêt!"
+          # npm run test:db:check # Temporarily disabled per user request (waiting for DB implementation)
+
+      # 5. Linting ESLint
+      - name: Exécution ESLint
+        run: npm run lint
+        if: always()
+
+      # 6. Vérification des types TypeScript
+      - name: Validation TypeScript (check types)
+        run: npm run typecheck
+        if: always()
+
+      # 7. Tests avec couverture
+      - name: Tests unitaires et couverture
+        run: npm run test:coverage
+        if: always()
+
+      # 8. Upload rapport couverture
+      - name: Upload rapport couverture
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report-${{ github.sha }}
+          path: coverage/
+          retention-days: 30
+
+      # 9. Build Next.js
+      - name: Build application Next.js
+        run: npm run build
+        if: always()
+
+      # 10. Commentaire PR avec résultats
+      - name: Ajout commentaire PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('./scripts/github-pr-comment.js')
+            await script({github, context, fs: require('fs')})
