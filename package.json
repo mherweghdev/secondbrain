@@ -19,7 +19,26 @@
     "docker:down": "docker compose down",
     "docker:restart": "npm run docker:down && npm run docker:up",
     "docker:clean": "docker compose down -v",
-    "test:db:check": "ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/test-db-connection.ts"
+    "test:db:check": "ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/test-db-connection.ts",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.test.{ts,tsx}": [
+      "jest --findRelatedTests --passWithNoTests"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.{md,yaml,yml}": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "next": "16.1.1",

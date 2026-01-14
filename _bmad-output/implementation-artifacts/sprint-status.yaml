@@ -39,14 +39,14 @@ story_location: _bmad-output/implementation-artifacts
 
 development_status:
   # Epic 0: Project Infrastructure & Foundation
-  epic-0: in-progress
+  epic-0: done
   0-1-initialize-nextjs-project-with-typescript: done
   0-2-setup-testing-infrastructure-jest-react-testing-library: done
   0-3-configure-test-database-docker-compose-postgresql: done
   0-4-setup-cicd-pipeline-github-actions: done
-  0-5-configure-code-quality-tools-pre-commit-hooks-husky: review
-  0-6-create-architecture-decision-records-adr-documentation: review
-  epic-0-retrospective: optional
+  0-5-configure-code-quality-tools-pre-commit-hooks-husky: done
+  0-6-create-architecture-decision-records-adr-documentation: done
+  epic-0-retrospective: done
 
   # Epic 1: Note Capture & Basic Storage
   epic-1: backlog

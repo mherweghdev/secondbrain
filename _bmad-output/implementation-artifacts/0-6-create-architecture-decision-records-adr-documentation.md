@@ -1,6 +1,6 @@
 # Story 0.6: Create Architecture Decision Records (ADR documentation)
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -23,6 +23,9 @@ So that future developers (and AI agents) understand the rationale behind key ch
 **And** README.md in docs/decisions/ explains the ADR process
 
 ## Tasks / Subtasks
+
+- [x] Review Follow-ups (AI)
+  - [x] [AI-Review][Medium] Remove legacy/conflicting ADR files (adr-002 old, adr-003 old, etc.) to ensure single source of truth
 
 - [x] Create ADR directory structure (AC: docs/decisions/ created)
   - [x] Create docs/decisions/ directory
@@ -73,26 +76,31 @@ So that future developers (and AI agents) understand the rationale behind key ch
 ### Previous Story Intelligence (Epic 0 Summary)
 
 **Story 0.1 - Initialize Next.js:**
+
 - Created project with create-next-app (ADR-001)
 - TypeScript, Tailwind CSS, ESLint, App Router
-- Import aliases configured (@/*)
+- Import aliases configured (@/\*)
 
 **Story 0.2 - Testing Infrastructure:**
+
 - Jest + React Testing Library (ADR-011)
 - Coverage thresholds 80%
 - Test colocation pattern
 
 **Story 0.3 - Test Database:**
+
 - Docker Compose PostgreSQL + Redis (ADR-002, ADR-005)
 - Integration tests with real database
 - CI/CD services configuration
 
 **Story 0.4 - CI/CD Pipeline:**
+
 - GitHub Actions workflow (ADR-010)
 - Quality gates: lint, typecheck, test, coverage
 - Performance <5 minutes
 
 **Story 0.5 - Code Quality Tools:**
+
 - Husky + lint-staged
 - Pre-commit hooks
 - Prettier + ESLint strict rules
@@ -108,58 +116,76 @@ Story 0.6 documents WHY these decisions were made (ADRs for all)
 # ADR-XXX: [Decision Title]
 
 ## Status
+
 [Proposed | Accepted | Deprecated | Superseded by ADR-YYY]
 
 ## Context
+
 [What is the issue that we're seeing that is motivating this decision?]
+
 - Business requirements
 - Technical constraints
 - Team capabilities
 - Timeline constraints
 
 ## Decision
+
 [What is the change that we're proposing and/or doing?]
+
 - Clear, concise statement
 - Implementation approach
 - Technical specifications
 
 ## Rationale
+
 [Why this decision over alternatives?]
+
 - Key factors considered
 - Critical requirements met
 - Trade-offs accepted
 
 ## Consequences
+
 ### Positive
+
 - [Benefit 1]
 - [Benefit 2]
 
 ### Negative
+
 - [Compromise 1]
 - [Compromise 2]
 
 ## Alternatives Considered
+
 ### Alternative A: [Name]
+
 - ✅ **Advantages**: ...
 - ❌ **Disadvantages**: ...
 - **Rejected because**: ...
 
 ### Alternative B: [Name]
+
 - ...
 
 ## Implementation Notes
+
 [How to implement this decision in practice?]
+
 - Configuration examples
 - Code patterns
 - Setup instructions
 
 ## Migration Path
+
 [How to change this decision if needed?]
+
 - Exit strategy
 - Vendor lock-in mitigation
 - Estimated migration effort
 
 ## See Also
+
 - Related ADR-XXX
 - Epic/Story references
 - External documentation
@@ -168,6 +194,7 @@ Story 0.6 documents WHY these decisions were made (ADRs for all)
 ### ADR-001: Starter Template Selection (create-next-app)
 
 **Context:**
+
 - Next.js 15 full-stack project (frontend + API backend)
 - Solo developer (intermediate level) learning TypeScript/Next.js
 - MVP single-user → Phase 2 multi-tenancy ready
@@ -175,6 +202,7 @@ Story 0.6 documents WHY these decisions were made (ADRs for all)
 
 **Decision:**
 create-next-app official CLI + manual configuration
+
 ```bash
 npx create-next-app@latest secondbrain \
   --typescript --tailwind --eslint --app --src-dir \
@@ -182,6 +210,7 @@ npx create-next-app@latest secondbrain \
 ```
 
 **Rationale:**
+
 - Minimal setup, maximum flexibility (zero technical debt)
 - Full control over every architectural decision
 - Compatible with TDD approach (build infrastructure progressively)
@@ -190,6 +219,7 @@ npx create-next-app@latest secondbrain \
 
 **Consequences:**
 **Positive:**
+
 - Zero boilerplate code to remove or understand
 - Complete ownership of architecture patterns
 - Ideal for learning (each decision documented)
@@ -197,11 +227,13 @@ npx create-next-app@latest secondbrain \
 - Fast Hot Module Replacement with Turbopack
 
 **Negative:**
+
 - Manual configuration required (testing, database, Redis, auth)
 - Developer responsibility for pattern consistency
 - More initial setup time vs enterprise templates
 
 **Alternatives Considered:**
+
 1. **Vercel Postgres Auth Starter (Drizzle ORM)**
    - ❌ Rejected: ORM choice too opinionated (Drizzle over Prisma)
    - Overengineered for MVP
@@ -219,6 +251,7 @@ npx create-next-app@latest secondbrain \
 ### ADR-002: Database Strategy (Supabase PostgreSQL)
 
 **Context:**
+
 - 41 Functional Requirements + 22 Non-Functional Requirements
 - Full-text search (FTS) critical for Epic 6 (Search, <5 sec latency)
 - Zero data loss backup requirement (NFR-11)
@@ -227,11 +260,13 @@ npx create-next-app@latest secondbrain \
 
 **Decision:**
 Supabase managed PostgreSQL (Free Tier initially)
+
 - Version: PostgreSQL 15.x
 - Connection pooling: PgBouncer (managed by Supabase)
 - Backup strategy: Automated point-in-time recovery
 
 **Rationale:**
+
 - Free tier: 500MB storage (~50,000 notes = 6-12 months solo usage)
 - Native full-text search (PostgreSQL FTS with tsvector)
 - Supabase Auth + Database integration (saves 2-3 days setup)
@@ -240,6 +275,7 @@ Supabase managed PostgreSQL (Free Tier initially)
 
 **Consequences:**
 **Positive:**
+
 - $0 MVP cost (free tier sufficient)
 - Native FTS (no external search engine needed)
 - Built-in Auth integration
@@ -248,11 +284,13 @@ Supabase managed PostgreSQL (Free Tier initially)
 - Excellent developer experience (Web UI, API docs)
 
 **Negative:**
+
 - Vendor lock-in to Supabase (mitigation: 3-5 days to self-hosted PostgreSQL)
 - Free tier limits (500MB) require paid upgrade after ~6 months ($25/month Pro)
 - PostgreSQL FTS less powerful than Elasticsearch (acceptable for MVP)
 
 **Alternatives Considered:**
+
 1. **Firebase Firestore**
    - ❌ Rejected: Limited FTS (requires Algolia integration)
    - Costs unpredictable (pay-per-query)
@@ -269,6 +307,7 @@ Supabase managed PostgreSQL (Free Tier initially)
    - Free tier Supabase sufficient MVP
 
 **Migration Path:**
+
 ```bash
 # When exceeding 500MB or >100 req/day:
 # Option A: Upgrade to Supabase Pro ($25/month, 8GB storage)
@@ -281,6 +320,7 @@ pg_restore -d [LOCAL_POSTGRES] backup.sql
 ### ADR-003: ORM Selection (Prisma)
 
 **Context:**
+
 - TypeScript type safety critical (prevent runtime errors)
 - Database migrations required (schema evolution)
 - Full-text search support needed (PostgreSQL FTS)
@@ -288,6 +328,7 @@ pg_restore -d [LOCAL_POSTGRES] backup.sql
 
 **Decision:**
 Prisma 5.x as primary ORM
+
 ```typescript
 // prisma/schema.prisma
 model Note {
@@ -299,6 +340,7 @@ model Note {
 ```
 
 **Rationale:**
+
 - Type-safe queries (auto-generated TypeScript types)
 - Migration workflow: `prisma migrate dev` (development), `prisma migrate deploy` (production)
 - FTS support via `@@fulltext` directive (PostgreSQL native)
@@ -307,6 +349,7 @@ model Note {
 
 **Consequences:**
 **Positive:**
+
 - Zero runtime type errors (compile-time safety)
 - Auto-generated types (no manual type definitions)
 - Migration history tracked in git (`prisma/migrations/`)
@@ -314,11 +357,13 @@ model Note {
 - Production-ready performance
 
 **Negative:**
+
 - Slight performance overhead vs raw SQL (negligible for MVP)
 - Learning curve Prisma schema syntax
 - Binary dependency (prisma-engines)
 
 **Alternatives Considered:**
+
 1. **Drizzle ORM**
    - ❌ Rejected: Newer, less mature than Prisma
    - Smaller community, fewer resources
@@ -337,6 +382,7 @@ model Note {
 ### ADR-004: Authentication Strategy (Supabase Auth)
 
 **Context:**
+
 - MVP: Single user (simple auth)
 - Phase 2: Multi-user SaaS (extensible auth)
 - Session management: 30-day token expiry, 2-hour inactivity timeout
@@ -344,6 +390,7 @@ model Note {
 
 **Decision:**
 Supabase Auth with email/password (MVP), OAuth extensible (Phase 2)
+
 ```typescript
 // Session management via JWT tokens (httpOnly cookies)
 // Token auto-refresh: 30-day expiry, configurable
@@ -352,6 +399,7 @@ Supabase Auth with email/password (MVP), OAuth extensible (Phase 2)
 ```
 
 **Rationale:**
+
 - Native integration with Next.js (`@supabase/auth-helpers-nextjs`)
 - JWT-based sessions (stateless, scalable)
 - httpOnly cookies (XSS protection)
@@ -361,6 +409,7 @@ Supabase Auth with email/password (MVP), OAuth extensible (Phase 2)
 
 **Consequences:**
 **Positive:**
+
 - Zero configuration MVP (Supabase project dashboard)
 - Secure by default (bcrypt, JWT, httpOnly cookies)
 - Middleware enforcement automatic (`middleware.ts`)
@@ -369,11 +418,13 @@ Supabase Auth with email/password (MVP), OAuth extensible (Phase 2)
 - MFA/SAML available Phase 2 (Supabase enterprise plan)
 
 **Negative:**
+
 - Vendor lock-in to Supabase (mitigation: NextAuth.js migration possible)
 - Advanced features (MFA, SAML) require paid plan
 - Supabase project dependency (managed service)
 
 **Alternatives Considered:**
+
 1. **NextAuth.js**
    - ❌ Deferred Phase 2: Overkill for single-user MVP
    - More complex setup (providers, adapters, database sessions)
@@ -392,16 +443,17 @@ Supabase Auth with email/password (MVP), OAuth extensible (Phase 2)
 ### Complete List of ADRs to Document
 
 **Core Infrastructure (Stories 0.1-0.5):**
+
 1. ✅ ADR-001: Starter Template Selection (create-next-app)
 2. ✅ ADR-002: Database Strategy (Supabase PostgreSQL)
 3. ✅ ADR-003: ORM Selection (Prisma)
 4. ✅ ADR-004: Authentication Strategy (Supabase Auth)
 
-**Additional Critical Decisions:**
-5. ADR-005: Async Processing (Redis + Bull Queue)
-   - Context: Epic 5 Tier-2 enrichment, Epic 7 digest generation
-   - Decision: Docker Redis (local) + Upstash Redis (Vercel)
-   - Alternatives: AWS SQS, Celery (Python), inline cron jobs
+**Additional Critical Decisions:** 5. ADR-005: Async Processing (Redis + Bull Queue)
+
+- Context: Epic 5 Tier-2 enrichment, Epic 7 digest generation
+- Decision: Docker Redis (local) + Upstash Redis (Vercel)
+- Alternatives: AWS SQS, Celery (Python), inline cron jobs
 
 6. ADR-006: API Design (Next.js API Routes REST)
    - Context: Full-stack Next.js, CRUD operations
@@ -469,16 +521,20 @@ docs/
 # Architecture Decision Records (ADRs)
 
 ## Purpose
+
 This directory contains Architecture Decision Records (ADRs) documenting all major technical decisions made for the SecondBrain project.
 
 ## Why ADRs?
+
 - **Knowledge Transfer**: Future developers (and AI agents) understand rationale
 - **Prevent Repeated Debates**: Decisions documented with context
 - **Onboarding**: New team members learn architecture quickly
 - **Accountability**: Clear ownership and consequences understood
 
 ## ADR Format
+
 Each ADR follows the standard format:
+
 1. **Status**: Accepted, Proposed, Deprecated, Superseded
 2. **Context**: Why was this decision needed?
 3. **Decision**: What was decided?
@@ -490,22 +546,24 @@ Each ADR follows the standard format:
 9. **See Also**: Related ADRs and documentation
 
 ## ADR Index
-| ADR | Title | Status | Date |
-|-----|-------|--------|------|
-| [001](./adr-001-starter-template.md) | Starter Template Selection | Accepted | 2026-01-11 |
-| [002](./adr-002-database-supabase-postgresql.md) | Database Strategy | Accepted | 2026-01-11 |
-| [003](./adr-003-orm-prisma.md) | ORM Selection | Accepted | 2026-01-11 |
-| [004](./adr-004-authentication-supabase-auth.md) | Authentication Strategy | Accepted | 2026-01-11 |
-| [005](./adr-005-async-processing-redis-bull.md) | Async Processing | Accepted | 2026-01-11 |
-| [006](./adr-006-api-design-nextjs-routes.md) | API Design | Accepted | 2026-01-11 |
-| [007](./adr-007-state-management-rsc-zustand.md) | State Management | Accepted | 2026-01-11 |
-| [008](./adr-008-markdown-editor-codemirror.md) | Markdown Editor | Accepted | 2026-01-11 |
-| [009](./adr-009-deployment-vercel-ovh.md) | Deployment Strategy | Accepted | 2026-01-11 |
-| [010](./adr-010-cicd-github-actions.md) | CI/CD Pipeline | Accepted | 2026-01-11 |
-| [011](./adr-011-testing-jest-rtl.md) | Testing Framework | Accepted | 2026-01-11 |
-| [012](./adr-012-logging-pino.md) | Logging Infrastructure | Accepted | 2026-01-11 |
+
+| ADR                                              | Title                      | Status   | Date       |
+| ------------------------------------------------ | -------------------------- | -------- | ---------- |
+| [001](./adr-001-starter-template.md)             | Starter Template Selection | Accepted | 2026-01-11 |
+| [002](./adr-002-database-supabase-postgresql.md) | Database Strategy          | Accepted | 2026-01-11 |
+| [003](./adr-003-orm-prisma.md)                   | ORM Selection              | Accepted | 2026-01-11 |
+| [004](./adr-004-authentication-supabase-auth.md) | Authentication Strategy    | Accepted | 2026-01-11 |
+| [005](./adr-005-async-processing-redis-bull.md)  | Async Processing           | Accepted | 2026-01-11 |
+| [006](./adr-006-api-design-nextjs-routes.md)     | API Design                 | Accepted | 2026-01-11 |
+| [007](./adr-007-state-management-rsc-zustand.md) | State Management           | Accepted | 2026-01-11 |
+| [008](./adr-008-markdown-editor-codemirror.md)   | Markdown Editor            | Accepted | 2026-01-11 |
+| [009](./adr-009-deployment-vercel-ovh.md)        | Deployment Strategy        | Accepted | 2026-01-11 |
+| [010](./adr-010-cicd-github-actions.md)          | CI/CD Pipeline             | Accepted | 2026-01-11 |
+| [011](./adr-011-testing-jest-rtl.md)             | Testing Framework          | Accepted | 2026-01-11 |
+| [012](./adr-012-logging-pino.md)                 | Logging Infrastructure     | Accepted | 2026-01-11 |
 
 ## Creating New ADRs
+
 1. Copy `adr-template.md` to `adr-XXX-short-title.md`
 2. Fill all sections completely
 3. Update this README.md index
@@ -513,13 +571,16 @@ Each ADR follows the standard format:
 5. Discuss with team (if applicable)
 
 ## Superseding ADRs
+
 When a decision changes:
+
 1. Update old ADR status to "Superseded by ADR-XXX"
 2. Create new ADR explaining new decision
 3. Reference old ADR in "Context" section
 4. Update README.md index
 
 ## References
+
 - [ADR GitHub Repository](https://adr.github.io/)
 - [Joel Spolsky on Architectural Decisions](https://www.joelonsoftware.com/2000/05/12/strategy-letter-i-ben-and-jerrys-vs-amazon/)
 ```
@@ -527,6 +588,7 @@ When a decision changes:
 ### Project Structure Alignment
 
 **New Files Created:**
+
 ```
 docs/
 └── decisions/
@@ -547,6 +609,7 @@ docs/
 ```
 
 **Modified Files:**
+
 ```
 README.md                                 # Link to docs/decisions/ (this story)
 ```
@@ -554,6 +617,7 @@ README.md                                 # Link to docs/decisions/ (this story)
 ### Guardrails for Dev Agent
 
 **CRITICAL: DO NOT:**
+
 - ❌ Skip any of the 12 ADRs (all are acceptance criteria)
 - ❌ Write vague ADRs without clear rationale
 - ❌ Forget "Alternatives Considered" section (critical for understanding)
@@ -561,6 +625,7 @@ README.md                                 # Link to docs/decisions/ (this story)
 - ❌ Use inconsistent ADR numbering (sequential required)
 
 **MUST DO:**
+
 - ✅ Follow ADR template format exactly (all sections)
 - ✅ Document all alternatives considered (minimum 2 per ADR)
 - ✅ Include clear migration paths (exit strategies)
@@ -571,6 +636,7 @@ README.md                                 # Link to docs/decisions/ (this story)
 - ✅ Date all ADRs (2026-01-13 for this story)
 
 **Quality Checklist:**
+
 1. All 12 ADRs created with complete sections
 2. README.md index updated with all ADRs
 3. adr-template.md matches architecture standard format
@@ -603,6 +669,7 @@ Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
 ✅ **All Tasks Completed Successfully**
 
 **Summary:**
+
 - Created complete ADR documentation system for SecondBrain project
 - All 12 Architecture Decision Records created with full sections (Status, Context, Decision, Rationale, Consequences, Alternatives, Implementation Notes, Migration Path, See Also)
 - ADR template established for future decisions
@@ -661,6 +728,7 @@ Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
 ### File List
 
 **Files Created (14 files):**
+
 - docs/decisions/README.md
 - docs/decisions/adr-template.md
 - docs/decisions/adr-001-starter-template.md
@@ -677,4 +745,10 @@ Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
 - docs/decisions/adr-012-logging-pino.md
 
 **Files Modified (1 file):**
+
 - README.md (added Architecture & Decisions section with link to docs/decisions/)
+- [Deleted] docs/decisions/adr-002-database-and-auth-strategy.md (Legacy)
+- [Deleted] docs/decisions/adr-003-orm-selection.md (Legacy)
+- [Deleted] docs/decisions/adr-004-async-processing-strategy.md (Legacy)
+- [Deleted] docs/decisions/adr-005-frontend-state-management.md (Legacy)
+- [Deleted] docs/decisions/adr-006-markdown-editor-selection.md (Legacy)
