@@ -43,7 +43,7 @@ development_status:
   0-1-initialize-nextjs-project-with-typescript: done
   0-2-setup-testing-infrastructure-jest-react-testing-library: done
   0-3-configure-test-database-docker-compose-postgresql: done
-  0-4-setup-cicd-pipeline-github-actions: in-progress
+  0-4-setup-cicd-pipeline-github-actions: done
   0-5-configure-code-quality-tools-pre-commit-hooks-husky: ready-for-dev
   0-6-create-architecture-decision-records-adr-documentation: ready-for-dev
   epic-0-retrospective: optional

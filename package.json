@@ -19,7 +19,7 @@
     "docker:down": "docker compose down",
     "docker:restart": "npm run docker:down && npm run docker:up",
     "docker:clean": "docker compose down -v",
-    "test:db:check": "ts-node scripts/test-db-connection.ts"
+    "test:db:check": "ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/test-db-connection.ts"
   },
   "dependencies": {
     "next": "16.1.1",
