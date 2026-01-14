@@ -7,16 +7,17 @@ on:
     branches: [main, develop]
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: "20"
   DATABASE_URL: postgresql://testuser:testpass@localhost:5432/secondbrain_test
   REDIS_URL: redis://localhost:6379
   NODE_ENV: test
   LOG_LEVEL: error
+  NEXT_PUBLIC_SUPABASE_URL: http://localhost:3000
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY: mock_pub_key
 
 permissions:
   contents: read
   pull-requests: write
-
 
 jobs:
   quality-checks:
@@ -54,14 +55,14 @@ jobs:
       - name: Checkout du dépôt
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Historique complet pour meilleure analyse
+          fetch-depth: 0 # Historique complet pour meilleure analyse
 
       # 2. Configuration Node.js avec cache npm
       - name: Configuration Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       # 3. Installation des dépendances
       - name: Installation des dépendances
