@@ -86,7 +86,7 @@ describe.skip('test:db:check script validation', () => {
 
     it('should have test:db:check script defined in package.json', async () => {
         // Validate that the npm script exists
-        const { stdout } = await execAsync('npm run test:db:check --help', {
+        await execAsync('npm run test:db:check --help', {
             cwd: process.cwd()
         }).catch(() => ({ stdout: '', stderr: '' }))
 

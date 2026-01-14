@@ -4,12 +4,23 @@
  * Related to CR-MED-4: Validate PR comment feature
  */
 
+/* eslint-disable @typescript-eslint/no-require-imports */
 const prCommentScript = require('../../../scripts/github-pr-comment.js');
+/* eslint-enable @typescript-eslint/no-require-imports */
+
+interface MockContext {
+    issue: { number: number };
+    repo: { owner: string; repo: string };
+    runId: string;
+    payload: {
+        repository: { html_url: string };
+    };
+}
 
 describe('GitHub PR Comment Script', () => {
-    let mockGithub: any;
-    let mockContext: any;
-    let mockFs: any;
+    let mockGithub: { rest: { issues: { createComment: jest.Mock } } };
+    let mockContext: MockContext;
+    let mockFs: { existsSync: jest.Mock; readFileSync: jest.Mock };
 
     beforeEach(() => {
         // Reset mocks
@@ -48,7 +59,7 @@ describe('GitHub PR Comment Script', () => {
             }
         }));
 
-        const result = await prCommentScript({ github: mockGithub, context: mockContext, fs: mockFs });
+        await prCommentScript({ github: mockGithub, context: mockContext, fs: mockFs });
 
         // Verify comment created
         expect(mockGithub.rest.issues.createComment).toHaveBeenCalledTimes(1);
