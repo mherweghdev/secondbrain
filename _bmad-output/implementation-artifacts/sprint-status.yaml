@@ -44,7 +44,7 @@ development_status:
   0-2-setup-testing-infrastructure-jest-react-testing-library: done
   0-3-configure-test-database-docker-compose-postgresql: done
   0-4-setup-cicd-pipeline-github-actions: done
-  0-5-configure-code-quality-tools-pre-commit-hooks-husky: in-progress
+  0-5-configure-code-quality-tools-pre-commit-hooks-husky: review
   0-6-create-architecture-decision-records-adr-documentation: review
   epic-0-retrospective: optional
 
