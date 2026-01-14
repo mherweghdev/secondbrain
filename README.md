@@ -24,6 +24,18 @@ SecondBrain is a web application designed to help you capture notes effortlessly
 - **Authentication**: Supabase Auth (planned)
 - **AI Integration**: Claude API (planned)
 
+## Architecture & Decisions
+
+All major architectural decisions are documented as Architecture Decision Records (ADRs) in [docs/decisions/](docs/decisions/). These documents explain the rationale behind key technology choices, including database strategy, authentication, deployment approach, and more.
+
+Key ADRs:
+- [ADR-001: Starter Template Selection](docs/decisions/adr-001-starter-template.md)
+- [ADR-002: Database Strategy (Supabase PostgreSQL)](docs/decisions/adr-002-database-supabase-postgresql.md)
+- [ADR-003: ORM Selection (Prisma)](docs/decisions/adr-003-orm-prisma.md)
+- [ADR-004: Authentication Strategy (Supabase Auth)](docs/decisions/adr-004-authentication-supabase-auth.md)
+
+See [docs/decisions/README.md](docs/decisions/README.md) for the complete ADR index.
+
 ## Getting Started
 
 ### Prerequisites
