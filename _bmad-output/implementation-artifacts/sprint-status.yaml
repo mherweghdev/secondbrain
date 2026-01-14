@@ -49,11 +49,11 @@ development_status:
   epic-0-retrospective: done
 
   # Epic 1: Note Capture & Basic Storage
-  epic-1: backlog
-  1-1-setup-supabase-authentication: backlog
-  1-2-create-notes-database-schema-with-prisma: backlog
-  1-3-implement-markdown-editor-with-codemirror-6: backlog
-  1-4-add-auto-save-functionality-with-visual-indicator: backlog
+  epic-1: in-progress
+  1-1-setup-supabase-authentication: done
+  1-2-create-notes-database-schema-with-prisma: ready-for-dev
+  1-3-implement-markdown-editor-with-codemirror-6: ready-for-dev
+  1-4-add-auto-save-functionality-with-visual-indicator: ready-for-dev
   1-5-display-note-list-with-filters: backlog
   1-6-implement-api-security-rate-limiting-cors-input-validation: backlog
   epic-1-retrospective: optional
