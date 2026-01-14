@@ -1,0 +1,38 @@
+# Workflow Status - secondbrain
+# BMad Method tracking for greenfield project
+# Generated: 2026-01-11
+
+project: "secondbrain"
+project_type: "greenfield"
+selected_track: "bmad-method"
+field_type: "greenfield"
+workflow_path: "method-greenfield"
+
+# Workflow Status Items
+# =====================
+# Initial Status:
+#   - required: Must be completed
+#   - optional: Can be skipped
+#   - recommended: Strongly suggested
+#   - conditional: Required if conditions met
+#
+# Completion Status:
+#   - {file-path}: Workflow completed (path to output file)
+#   - skipped: Workflow was skipped
+
+workflow_status:
+  # Phase 1: Analysis (Optional)
+  product-brief: _bmad-output/planning-artifacts/product-brief-secondbrain-2026-01-11.md
+
+  # Phase 2: Planning (Required)
+  prd: _bmad-output/planning-artifacts/prd.md
+  create-ux-design: conditional
+
+  # Phase 3: Solutioning (Required)
+  create-architecture: _bmad-output/planning-artifacts/architecture/index.md
+  create-epics-and-stories: _bmad-output/planning-artifacts/epics/index.md
+  test-design: skipped
+  implementation-readiness: skipped
+
+  # Phase 4: Implementation
+  sprint-planning: _bmad-output/implementation-artifacts/sprint-status.yaml

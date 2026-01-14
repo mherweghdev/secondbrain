@@ -1,0 +1,143 @@
+# generated: 2026-01-12
+# project: secondbrain
+# tracking_system: file-system
+# story_location: {project-root}/_bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-01-12
+project: secondbrain
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  # Epic 0: Project Infrastructure & Foundation
+  epic-0: in-progress
+  0-1-initialize-nextjs-project-with-typescript: done
+  0-2-setup-testing-infrastructure-jest-react-testing-library: done
+  0-3-configure-test-database-docker-compose-postgresql: done
+  0-4-setup-cicd-pipeline-github-actions: in-progress
+  0-5-configure-code-quality-tools-pre-commit-hooks-husky: ready-for-dev
+  0-6-create-architecture-decision-records-adr-documentation: ready-for-dev
+  epic-0-retrospective: optional
+
+  # Epic 1: Note Capture & Basic Storage
+  epic-1: backlog
+  1-1-setup-supabase-authentication: backlog
+  1-2-create-notes-database-schema-with-prisma: backlog
+  1-3-implement-markdown-editor-with-codemirror-6: backlog
+  1-4-add-auto-save-functionality-with-visual-indicator: backlog
+  1-5-display-note-list-with-filters: backlog
+  1-6-implement-api-security-rate-limiting-cors-input-validation: backlog
+  epic-1-retrospective: optional
+
+  # Epic 10: Keyboard-First UX & Responsive Design
+  epic-10: backlog
+  10-1-implement-global-keyboard-shortcuts: backlog
+  10-2-create-keyboard-cheatsheet-component: backlog
+  10-3-add-markdown-formatting-shortcuts: backlog
+  10-4-implement-responsive-layouts-desktop-mobile-tablet: backlog
+  epic-10-retrospective: optional
+
+  # Epic 2: Note Editing & Archive Management
+  epic-2: backlog
+  2-1-enable-inline-note-editing: backlog
+  2-2-implement-archive-functionality-soft-delete: backlog
+  2-3-add-restore-archived-notes: backlog
+  2-4-track-note-edit-history: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Tier-1 Local Analysis & Suggestions
+  epic-3: backlog
+  3-1-extract-keywords-hashtags-mentions-entities: backlog
+  3-2-classify-note-type-automatically: backlog
+  3-3-detect-basic-connections-between-notes: backlog
+  3-4-store-tier-1-suggestions-in-database: backlog
+  3-5-display-tier-1-suggestions-in-note-list: backlog
+  epic-3-retrospective: optional
+
+  # Epic 5: Friday Refinement Workflow
+  epic-5: backlog
+  5-1-create-refinement-mode-ui-one-note-at-a-time: backlog
+  5-2-display-and-validate-suggestions-accept-reject-modify: backlog
+  5-3-enable-note-editing-during-refinement: backlog
+  5-4-confirm-metadata-and-save-note: backlog
+  5-5-display-refinement-progress-tracking: backlog
+  5-6-track-refinement-session-timing: backlog
+  epic-5-retrospective: optional
+
+  # Epic 7: Weekly Digest Generation
+  epic-7: backlog
+  7-1-create-digest-generation-algorithm: backlog
+  7-2-format-digest-with-professional-markdown-structure: backlog
+  7-3-schedule-digest-generation-bull-queue-cron-job: backlog
+  7-4-store-digest-with-timestamp-in-database: backlog
+  7-5-create-in-app-digest-viewer: backlog
+  7-6-implement-digest-history-and-searchability: backlog
+  epic-7-retrospective: optional
+
+  # Epic 8: Email Digest Delivery (Phase 2)
+  epic-8: backlog
+  8-1-configure-smtp-email-service-integration: backlog
+  8-2-generate-html-email-template-from-digest-markdown: backlog
+  8-3-schedule-digest-email-sending-monday-morning: backlog
+  8-4-implement-email-retry-mechanism-with-exponential-backoff: backlog
+  8-5-validate-email-format-before-sending: backlog
+  epic-8-retrospective: optional
+
+  # Epic 4: Tier-2 Claude API Enrichment
+  epic-4: backlog
+  4-1-setup-redis-and-bull-queue-for-async-processing: backlog
+  4-2-integrate-claude-api-for-tier-2-suggestions: backlog
+  4-3-queue-notes-for-tier-2-processing: backlog
+  4-4-implement-token-counting-and-cost-tracking: backlog
+  4-5-implement-error-handling-and-retry-logic: backlog
+  4-6-display-tier-2-suggestions-in-refinement-ui: backlog
+  epic-4-retrospective: optional
+
+  # Epic 6: Search & Connection-Aware Retrieval
+  epic-6: backlog
+  6-1-implement-postgresql-full-text-search-fts: backlog
+  6-2-create-search-interface-ui: backlog
+  6-3-implement-keyword-search-content-metadata: backlog
+  6-4-implement-tag-based-search-tag-mention: backlog
+  6-5-display-connection-aware-search-results: backlog
+  6-6-add-search-results-sorting-and-filtering: backlog
+  epic-6-retrospective: optional
+
+  # Epic 9: Data Integrity & Backup System
+  epic-9: backlog
+  9-1-implement-daily-automated-backups: backlog
+  9-2-encrypt-backups-with-aes-256: backlog
+  9-3-implement-backup-verification-job: backlog
+  9-4-create-immutable-audit-trail: backlog
+  9-5-implement-transaction-safety-acid-compliance: backlog
+  9-6-implement-data-recovery-mechanisms: backlog
+  epic-9-retrospective: optional
