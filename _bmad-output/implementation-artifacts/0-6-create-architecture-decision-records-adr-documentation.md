@@ -1,6 +1,6 @@
 # Story 0.6: Create Architecture Decision Records (ADR documentation)
 
-Status: ready-for-dev
+Status: review
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -24,49 +24,49 @@ So that future developers (and AI agents) understand the rationale behind key ch
 
 ## Tasks / Subtasks
 
-- [ ] Create ADR directory structure (AC: docs/decisions/ created)
-  - [ ] Create docs/decisions/ directory
-  - [ ] Create docs/decisions/README.md explaining ADR process
-  - [ ] Create docs/decisions/adr-template.md with standard format
-  - [ ] Verify directory structure matches project standards
-- [ ] Document ADR-001: Starter Template Selection (AC: create-next-app documented)
-  - [ ] Create docs/decisions/adr-001-starter-template.md
-  - [ ] Document context: Why template choice mattered
-  - [ ] Document decision: create-next-app + manual config
-  - [ ] Document alternatives: Vercel boilerplates, enterprise starters
-  - [ ] Document consequences: Flexibility vs setup time tradeoff
-- [ ] Document ADR-002: Database Strategy (AC: Supabase PostgreSQL documented)
-  - [ ] Create docs/decisions/adr-002-database-supabase-postgresql.md
-  - [ ] Document context: Persistence, FTS, backup requirements
-  - [ ] Document decision: Supabase managed PostgreSQL
-  - [ ] Document alternatives: Firebase, MongoDB, self-hosted
-  - [ ] Document migration path: Free tier → Pro or self-hosted
-- [ ] Document ADR-003: ORM Selection (AC: Prisma documented)
-  - [ ] Create docs/decisions/adr-003-orm-prisma.md
-  - [ ] Document context: Type safety, migrations, FTS support
-  - [ ] Document decision: Prisma 5.x
-  - [ ] Document alternatives: Drizzle, TypeORM, raw SQL
-  - [ ] Document consequences: Type-safe vs raw performance
-- [ ] Document ADR-004: Authentication Strategy (AC: Supabase Auth documented)
-  - [ ] Create docs/decisions/adr-004-authentication-supabase-auth.md
-  - [ ] Document context: Session management, security requirements
-  - [ ] Document decision: Supabase Auth with JWT tokens
-  - [ ] Document alternatives: NextAuth.js, Auth0, custom solution
-  - [ ] Document Phase 2 extensibility: OAuth, MFA, SAML
-- [ ] Document additional critical ADRs (AC: All major decisions covered)
-  - [ ] ADR-005: Async Processing (Redis + Bull Queue)
-  - [ ] ADR-006: API Design (Next.js API Routes REST)
-  - [ ] ADR-007: State Management (RSC + Zustand)
-  - [ ] ADR-008: Markdown Editor (CodeMirror 6)
-  - [ ] ADR-009: Deployment Strategy (Vercel + OVH VPS fallback)
-  - [ ] ADR-010: CI/CD Pipeline (GitHub Actions)
-  - [ ] ADR-011: Testing Framework (Jest + React Testing Library)
-  - [ ] ADR-012: Logging Infrastructure (Pino structured JSON)
-- [ ] Create ADR index and cross-references (AC: Easy navigation)
-  - [ ] Update docs/decisions/README.md with full ADR list
-  - [ ] Add cross-references between related ADRs
-  - [ ] Link ADRs to implementation artifacts (Story files)
-  - [ ] Add "See Also" sections for related decisions
+- [x] Create ADR directory structure (AC: docs/decisions/ created)
+  - [x] Create docs/decisions/ directory
+  - [x] Create docs/decisions/README.md explaining ADR process
+  - [x] Create docs/decisions/adr-template.md with standard format
+  - [x] Verify directory structure matches project standards
+- [x] Document ADR-001: Starter Template Selection (AC: create-next-app documented)
+  - [x] Create docs/decisions/adr-001-starter-template.md
+  - [x] Document context: Why template choice mattered
+  - [x] Document decision: create-next-app + manual config
+  - [x] Document alternatives: Vercel boilerplates, enterprise starters
+  - [x] Document consequences: Flexibility vs setup time tradeoff
+- [x] Document ADR-002: Database Strategy (AC: Supabase PostgreSQL documented)
+  - [x] Create docs/decisions/adr-002-database-supabase-postgresql.md
+  - [x] Document context: Persistence, FTS, backup requirements
+  - [x] Document decision: Supabase managed PostgreSQL
+  - [x] Document alternatives: Firebase, MongoDB, self-hosted
+  - [x] Document migration path: Free tier → Pro or self-hosted
+- [x] Document ADR-003: ORM Selection (AC: Prisma documented)
+  - [x] Create docs/decisions/adr-003-orm-prisma.md
+  - [x] Document context: Type safety, migrations, FTS support
+  - [x] Document decision: Prisma 5.x
+  - [x] Document alternatives: Drizzle, TypeORM, raw SQL
+  - [x] Document consequences: Type-safe vs raw performance
+- [x] Document ADR-004: Authentication Strategy (AC: Supabase Auth documented)
+  - [x] Create docs/decisions/adr-004-authentication-supabase-auth.md
+  - [x] Document context: Session management, security requirements
+  - [x] Document decision: Supabase Auth with JWT tokens
+  - [x] Document alternatives: NextAuth.js, Auth0, custom solution
+  - [x] Document Phase 2 extensibility: OAuth, MFA, SAML
+- [x] Document additional critical ADRs (AC: All major decisions covered)
+  - [x] ADR-005: Async Processing (Redis + Bull Queue)
+  - [x] ADR-006: API Design (Next.js API Routes REST)
+  - [x] ADR-007: State Management (RSC + Zustand)
+  - [x] ADR-008: Markdown Editor (CodeMirror 6)
+  - [x] ADR-009: Deployment Strategy (Vercel + OVH VPS fallback)
+  - [x] ADR-010: CI/CD Pipeline (GitHub Actions)
+  - [x] ADR-011: Testing Framework (Jest + React Testing Library)
+  - [x] ADR-012: Logging Infrastructure (Pino structured JSON)
+- [x] Create ADR index and cross-references (AC: Easy navigation)
+  - [x] Update docs/decisions/README.md with full ADR list
+  - [x] Add cross-references between related ADRs
+  - [x] Link ADRs to implementation artifacts (Story files)
+  - [x] Add "See Also" sections for related decisions
 
 ## Dev Notes
 
@@ -600,11 +600,67 @@ Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
 
 ### Completion Notes List
 
-(To be filled by dev agent during implementation)
+✅ **All Tasks Completed Successfully**
+
+**Summary:**
+- Created complete ADR documentation system for SecondBrain project
+- All 12 Architecture Decision Records created with full sections (Status, Context, Decision, Rationale, Consequences, Alternatives, Implementation Notes, Migration Path, See Also)
+- ADR template established for future decisions
+- Central README.md with complete index and ADR process documentation
+- Main README.md updated with link to ADR documentation
+
+**Implementation Details:**
+
+1. **Directory Structure**: Created docs/decisions/ directory with:
+   - adr-template.md (standard template for all future ADRs)
+   - README.md (ADR process guide and complete index)
+   - adr-001 through adr-012 (all decision records)
+
+2. **ADRs Completed:**
+   - ADR-001: Starter Template Selection (create-next-app rationale)
+   - ADR-002: Database Strategy (Supabase PostgreSQL)
+   - ADR-003: ORM Selection (Prisma 5.x)
+   - ADR-004: Authentication Strategy (Supabase Auth)
+   - ADR-005: Async Processing (Redis + Bull Queue)
+   - ADR-006: API Design (Next.js REST routes)
+   - ADR-007: State Management (RSC + Zustand)
+   - ADR-008: Markdown Editor (CodeMirror 6)
+   - ADR-009: Deployment Strategy (Vercel + OVH VPS)
+   - ADR-010: CI/CD Pipeline (GitHub Actions)
+   - ADR-011: Testing Framework (Jest + React Testing Library)
+   - ADR-012: Logging Infrastructure (Pino structured JSON)
+
+3. **Quality Checklist Satisfied:**
+   - All 12 ADRs created with complete sections
+   - README.md index updated with all ADRs and links
+   - adr-template.md matches architecture standard format
+   - Each ADR includes minimum 2 alternatives considered
+   - Each ADR includes clear migration path
+   - Cross-references between related ADRs complete (See Also sections)
+   - Main README.md links to docs/decisions/
+
+4. **Files Created:** 14 files
+   - docs/decisions/README.md
+   - docs/decisions/adr-template.md
+   - docs/decisions/adr-001-starter-template.md
+   - docs/decisions/adr-002-database-supabase-postgresql.md
+   - docs/decisions/adr-003-orm-prisma.md
+   - docs/decisions/adr-004-authentication-supabase-auth.md
+   - docs/decisions/adr-005-async-processing-redis-bull.md
+   - docs/decisions/adr-006-api-design-nextjs-routes.md
+   - docs/decisions/adr-007-state-management-rsc-zustand.md
+   - docs/decisions/adr-008-markdown-editor-codemirror.md
+   - docs/decisions/adr-009-deployment-vercel-ovh.md
+   - docs/decisions/adr-010-cicd-github-actions.md
+   - docs/decisions/adr-011-testing-jest-rtl.md
+   - docs/decisions/adr-012-logging-pino.md
+
+5. **Files Modified:** 1 file
+   - README.md (added Architecture & Decisions section with links)
 
 ### File List
 
-**Files to be created:**
+**Files Created (14 files):**
 - docs/decisions/README.md
 - docs/decisions/adr-template.md
 - docs/decisions/adr-001-starter-template.md
@@ -620,5 +676,5 @@ Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
 - docs/decisions/adr-011-testing-jest-rtl.md
 - docs/decisions/adr-012-logging-pino.md
 
-**Files to be modified:**
-- README.md (link to docs/decisions/)
+**Files Modified (1 file):**
+- README.md (added Architecture & Decisions section with link to docs/decisions/)
